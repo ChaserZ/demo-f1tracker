@@ -1,0 +1,68 @@
+components:
+  schemas:
+    teamId:
+      type: integer
+    Team:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/teamId'
+        year:
+          type: integer
+        name:
+          type: string
+        headquarters:
+          type: string
+        principal:
+          type: string
+        chassis:
+          type: string
+        drivers:
+          type: array
+          items:
+            type: string
+    trackId:
+      type: integer
+    Track:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/trackId'
+        name:
+          type: string
+        location:
+          type: string
+        lengthInKM:
+          type: number
+        trackType:
+          type: string
+          enum:
+            - Oval
+            - Road
+            - Street
+    raceId:
+      type: integer
+    Race:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/raceId'
+        name:
+          type: string
+        nicknames:
+          type: array
+          items:
+            type: string
+        year:
+          type: integer
+        track:
+          $ref: 'components.yaml#/components/schemas/Track'
+
+  parameters:
+    TeamID:
+      name: id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/teamId'
+

@@ -1,0 +1,78 @@
+openapi: 3.0.3-
+info:
+  title: F1 Tracker - Teams
+  description: F1 Tracker - Teams
+  version: 0.1.0
+servers:
+  - url: 'https://f1tracker.chaserz.com/api/teams'
+paths:
+  /:
+    get:
+      description: Gets a list of team names and IDs
+      responses:
+        200:
+          description: A list of team names and IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+  /{id}:
+    get:
+      description: Gets the details of a specific team
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: 'components.yaml#/components/schemas/teamId'
+      responses:
+        200:
+          description: Details of a team
+          content:
+            application/json:
+              schema:
+                $ref: 'components.yaml#/components/schemas/Team'
+    put:
+      description: Create a new team
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: 'components.yaml#/components/schemas/teamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'components.yaml#/components/schemas/Team'
+      responses:
+        200:
+          description: Successfully created team
+        500:
+          description: Problem creating team
+    post:
+      description: Update an existing team
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: 'components.yaml#/components/schemas/teamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'components.yaml#/components/schemas/Team'
+      responses:
+        200:
+          description: Successfully created team
+        500:
+          description: Problem creating team
+
